@@ -38,3 +38,12 @@ for table, file in table_file_dict.items():
     df = pd.read_csv(file) 
     df.to_sql(table, con=engine, index=False, if_exists="replace") 
     print(f"Rows loaded into table: {table}")
+query1 = f"SELECT count(*) FROM {table};"
+
+count = pd.read_sql(query1, con=engine)
+print(f"no of Rows loaded into table: {count}")
+
+query2 = f"SELECT * FROM {table} LIMIT 10;"
+
+result = pd.read_sql(query2, con=engine)
+print(f"no of Rows loaded into table: {result}")
